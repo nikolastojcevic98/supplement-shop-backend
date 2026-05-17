@@ -24,4 +24,11 @@ public class OrderController {
         order.setOrderDate(java.time.LocalDateTime.now());
         return orderRepository.save(order);
     }
+
+    @PutMapping("/{id}/status")
+    public Order updateOrderStatus(@PathVariable Integer id, @RequestBody Order orderUpdate) {
+        Order existingOrder = orderRepository.findById(id).orElseThrow();
+        existingOrder.setStatus(orderUpdate.getStatus());
+        return orderRepository.save(existingOrder);
+    }
 }
