@@ -16,7 +16,9 @@ public class ReviewController {
 
     @GetMapping
     public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+        List<Review> reviews = reviewRepository.findAll();
+        System.out.println("Dohvaćene recenzije: " + reviews.size());
+        return reviews;
     }
 
     @PostMapping
