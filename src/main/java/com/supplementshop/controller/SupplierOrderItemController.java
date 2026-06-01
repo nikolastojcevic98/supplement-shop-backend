@@ -18,4 +18,9 @@ public class SupplierOrderItemController {
     public List<SupplierOrderItem> getAllSupplierOrderItems() {
         return supplierOrderItemRepository.findAll();
     }
+
+    @PostMapping
+    public SupplierOrderItem createSupplierOrderItem(@RequestBody SupplierOrderItem item) {
+        return supplierOrderItemRepository.save(item);
+    }
 }
