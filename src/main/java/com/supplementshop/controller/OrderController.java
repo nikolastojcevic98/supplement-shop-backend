@@ -3,6 +3,7 @@ package com.supplementshop.controller;
 import com.supplementshop.model.Order;
 import com.supplementshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/status")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('OWNER')")
     public Order updateOrderStatus(@PathVariable Integer id, @RequestBody Order orderUpdate) {
         Order existingOrder = orderRepository.findById(id).orElseThrow();
         existingOrder.setStatus(orderUpdate.getStatus());
